@@ -1,0 +1,2 @@
+# jenkinsMultibranchPipelinePython-sharedLibrary
+WIP
