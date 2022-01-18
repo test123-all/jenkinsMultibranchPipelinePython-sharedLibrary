@@ -44,8 +44,8 @@ pipeline {
                     }
 
                     //** Load groovy scripts**:
-                    gvInitScript = load "./jenkins/initNodeTestScripts.groovy"
-                    gvPython3Scripts = load "./jenkins/python3RelatedPipelineScripts.groovy"
+                    gvInitScript = load "./jenkinsSharedLibrary/initNodeTestScripts.groovy"
+                    gvPython3Scripts = load "./jenkinsSharedLibrary/python3RelatedPipelineScripts.groovy"
 
                     //** tests for Versions and availability**:
                     gvInitScript.getPython3Version()
