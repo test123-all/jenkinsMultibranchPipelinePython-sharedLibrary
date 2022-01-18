@@ -14,10 +14,10 @@ def runPython3Unittests() {
 
 def poetryGetOudatedPythonPackageNameAndVersions() {
     // returns the outdated package in the format of: 'pyside6 6.2.0 6.2.1' or an empty String(all packages up to date)
-    int returnStatus = sh returnStatus: true, script:'/bin/bash ./poetryGetOudatedPythonPackageNameAndVersions.sh'
+    int returnStatus = sh returnStatus: true, script:'/bin/bash ./jenkins/poetryGetOudatedPythonPackageNameAndVersions.sh'
     if (returnStatus == 0) {
         // return ShellStdoutPackageString
-        String PackageString = sh returnStdout: true, script:'/bin/bash ./poetryGetOudatedPythonPackageNameAndVersions.sh'
+        String PackageString = sh returnStdout: true, script:'/bin/bash ./jenkins/poetryGetOudatedPythonPackageNameAndVersions.sh'
 
         return PackageString
     } else {
