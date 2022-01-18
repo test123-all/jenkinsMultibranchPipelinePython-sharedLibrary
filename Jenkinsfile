@@ -69,7 +69,7 @@ pipeline {
             }
         }
 
-        stage('Update(with poetry) python3-package and Run Unittests') {
+/*        stage('Update(with poetry) python3-package and Run Unittests') {
             steps {
                 script{
                     // gets the outdated package in the format of: 'pyside6 6.2.0 6.2.1'
@@ -95,6 +95,8 @@ pipeline {
                 }
             }
         }
+*/
+
 
 
         stage('After successfully updated package, commit updated poetry-dependencie-files(pyproject.toml, poetry.lock) to the repository') {
