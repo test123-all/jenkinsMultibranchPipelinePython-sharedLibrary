@@ -1,6 +1,6 @@
 def runPython3Unittests() {
     // run unittests
-    String unittestOutput = sh returnStdout: true, script:"/bin/bash ./runPythonUnittests.sh"
+    String unittestOutput = sh returnStdout: true, script:"/bin/bash ./jenkinsSharedLibrary/runPythonUnittests.sh"
 
     if (unittestOutput != null) {
     // there is at least one failed unittest
@@ -14,10 +14,10 @@ def runPython3Unittests() {
 
 def poetryGetOudatedPythonPackageNameAndVersions() {
     // returns the outdated package in the format of: 'pyside6 6.2.0 6.2.1' or an empty String(all packages up to date)
-    int returnStatus = sh returnStatus: true, script:'/bin/bash ./jenkins/poetryGetOudatedPythonPackageNameAndVersions.sh'
+    int returnStatus = sh returnStatus: true, script:'/bin/bash ./jenkinsSharedLibrary/poetryGetOudatedPythonPackageNameAndVersions.sh'
     if (returnStatus == 0) {
         // return ShellStdoutPackageString
-        String PackageString = sh returnStdout: true, script:'/bin/bash ./jenkins/poetryGetOudatedPythonPackageNameAndVersions.sh'
+        String PackageString = sh returnStdout: true, script:'/bin/bash ./jenkinsSharedLibrary/poetryGetOudatedPythonPackageNameAndVersions.sh'
 
         return PackageString
     } else {
@@ -33,7 +33,7 @@ def poetryGetOudatedPythonPackageNameAndVersions() {
 def UpdatePython3PackageWithPoetry(PackageString) {
     // update python-package with poetry
     // update always gives back output if it can't update there is a ERROR output which contains "ERROR"
-    String ShellStdout = sh returnStdout: true, script:"/bin/bash ./pythonPoetryUpdatePackages.sh ${PackageString} --update"
+    String ShellStdout = sh returnStdout: true, script:"/bin/bash ./jenkinsSharedLibrary/pythonPoetryUpdatePackages.sh ${PackageString} --update"
 
     if(ShellStdout != null && ShellStdout.contains("ERROR")) {
         // Package couldn't be updated
@@ -49,7 +49,7 @@ def UpdatePython3PackageWithPoetry(PackageString) {
 
 def doRollbackPython3PackageWithPoetry(PackageString) {
     // do rollback/ clean up
-    String ShellStdout = sh returnStdout: true, script:"/bin/bash ./pythonPoetryUpdatePackages.sh ${PackageString} --rollback"
+    String ShellStdout = sh returnStdout: true, script:"/bin/bash ./jenkinsSharedLibrary/pythonPoetryUpdatePackages.sh ${PackageString} --rollback"
     echo "${ShellStdout}"
     global_Emailbody = "${global_Emailbody}${ShellStdout}"
 }
